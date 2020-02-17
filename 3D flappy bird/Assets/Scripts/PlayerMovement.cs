@@ -6,25 +6,23 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float forwardSpeed;
+    public float forwardForce;
     public float jumpForce;
-    public float fallMultiplier = 3.5f;
-    public float lowJumpMultiplier = 2f;
     public float latteralForce;
 
     public Rigidbody rb;
 
-    //void Update () 
-    //{
-    //    if (rb.velocity.y < 0) 
-    //    {
-    //        rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-    //    }
-    //}
 
     void FixedUpdate()
     {
-        Vector3 forwardVelocity = new Vector3(0, 0, forwardSpeed);
-        rb.MovePosition(transform.position + forwardVelocity*Time.deltaTime);
+        //Vector3 forwardVelocity = new Vector3(0, 0, forwardSpeed);
+
+        if (rb.velocity.z <= forwardSpeed)
+        {
+            rb.AddForce(0,0,forwardForce*Time.deltaTime);
+        }
+
+        //rb.MovePosition(transform.position + forwardVelocity*Time.deltaTime);
 
 
         // Jump mechanic. May need tweaking
